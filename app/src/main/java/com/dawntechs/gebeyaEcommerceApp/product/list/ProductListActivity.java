@@ -25,6 +25,9 @@ public class ProductListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+        //todo: page 1 - implement the first card
+        //todo: page 1 - search
+        //todo: page 1 - menu
         adapter = new ProductListAdapter(this, new ArrayList<Product>());
 
         RecyclerView bs_recyclerView = findViewById(R.id.best_sell_product_rv);

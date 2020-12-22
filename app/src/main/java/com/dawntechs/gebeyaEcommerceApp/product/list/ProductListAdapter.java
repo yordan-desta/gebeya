@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dawntechs.gebeyaEcommerceApp.R;
 import com.dawntechs.gebeyaEcommerceApp.common.EntityListAdapter;
 import com.dawntechs.gebeyaEcommerceApp.product.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,12 +42,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         holder.price.setText(String.format("%s%s", holder.item.currency, holder.item.price));
         holder.desc.setText(holder.item.nom);
-        //todo: image here
+        Picasso.get().load(holder.item.imageUrl).into(holder.imageView);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo: go to detail
+                //todo: page 2 - go to detail
                 Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
             }
         });
@@ -63,7 +64,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View mView;
         private final TextView price;
