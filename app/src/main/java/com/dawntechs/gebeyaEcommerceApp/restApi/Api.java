@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 public interface Api {
     //in a real application there will be a query to limit the page number and start index
 
-    @GET("/products")
+    @GET("products")
     Call<List<Product>> fetchProducts();
 }

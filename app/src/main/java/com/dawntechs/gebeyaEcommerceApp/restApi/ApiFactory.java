@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiFactory {
 
-    private static final String BASE_URL = "https://store-api.glitch.me/api";
+    private static final String BASE_URL = "https://store-api.glitch.me/api/";
 
     public static Api create() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
