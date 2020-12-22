@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dawntechs.gebeyaEcommerceApp.MainApp;
 import com.dawntechs.gebeyaEcommerceApp.R;
+import com.dawntechs.gebeyaEcommerceApp.common.BaseActivity;
 import com.dawntechs.gebeyaEcommerceApp.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductListActivity extends AppCompatActivity {
+public class ProductListActivity extends BaseActivity {
 
     private ProductListAdapter adapter;
 

@@ -3,4 +3,6 @@
     <string name="label_featured">Featured</string>
     <string name="label_see_more">See all</string>
     <string name="label_best_sell">Best Sell</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="buy_now">Buy Now</string>
 </resources>

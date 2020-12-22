@@ -1,9 +1,15 @@
 package com.dawntechs.gebeyaEcommerceApp.product;
 
-import com.dawntechs.gebeyaEcommerceApp.common.BaseEntity;
-/** Product model **/
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Product extends BaseEntity {
+import com.dawntechs.gebeyaEcommerceApp.common.BaseEntity;
+
+/**
+ * Product model
+ **/
+
+public class Product extends BaseEntity implements Parcelable {
     //data encapsulation ignored for simplicity
     public String nom;
 
@@ -12,4 +18,37 @@ public class Product extends BaseEntity {
     public String currency;
 
     public String imageUrl;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeFloat(id);
+        parcel.writeString(nom);
+        parcel.writeString(currency);
+        parcel.writeString(imageUrl);
+        parcel.writeDouble(price);
+    }
+
+    public static final Parcelable.Creator<Product> CREATOR
+            = new Parcelable.Creator<Product>() {
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    private Product(Parcel in) {
+        id = in.readFloat();
+        nom = in.readString();
+        currency = in.readString();
+        imageUrl = in.readString();
+        price = in.readDouble();
+    }
 }
