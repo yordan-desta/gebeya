@@ -19,6 +19,8 @@ public class Product extends BaseEntity implements Parcelable {
 
     public String imageUrl;
 
+    public Product(){}
+
     @Override
     public int describeContents() {
         return 0;

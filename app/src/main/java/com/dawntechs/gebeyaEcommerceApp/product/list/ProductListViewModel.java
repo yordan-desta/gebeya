@@ -1,5 +1,6 @@
 package com.dawntechs.gebeyaEcommerceApp.product.list;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -15,7 +16,8 @@ public class ProductListViewModel extends ViewModel {
     private ProductRepository repository;
 
     public ProductListViewModel(MainApp app) {
-        //we would use DI for this purpose - left for simplicity
+        super();
+        //we would use DI in a real app to handle it - left for simplicity
         repository = new ProductRepository(app);
     }
 
