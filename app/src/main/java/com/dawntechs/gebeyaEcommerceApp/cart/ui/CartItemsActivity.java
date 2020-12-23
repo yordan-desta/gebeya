@@ -25,7 +25,7 @@ public class CartItemsActivity extends BaseActivity implements CartListAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_items);
 
-        setUpToolbar("Cart");
+        setUpToolbar("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
