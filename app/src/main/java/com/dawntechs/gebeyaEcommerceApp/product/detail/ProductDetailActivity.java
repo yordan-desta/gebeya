@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 
 import com.dawntechs.gebeyaEcommerceApp.MainApp;
@@ -29,6 +30,10 @@ public class ProductDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_product_detail);
 
         final Product product = getProductFromIntent();
+
+        setUpToolbar("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (product != null) {
 

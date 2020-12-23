@@ -2,6 +2,7 @@ package com.dawntechs.gebeyaEcommerceApp.cart.ui;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,10 @@ public class CartItemsActivity extends BaseActivity implements CartListAdapter.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_items);
+
+        setUpToolbar("Cart");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         cartListAdapter = new CartListAdapter(this, cartItems);
 

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,11 +34,12 @@ public class ProductListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_list);
+        setContentView(R.layout.activity_product_list_container);
+
+        setUpToolbar(getString(R.string.app_name));
 
         //todo: page 1 - implement the first card
         //todo: page 1 - search
-        //todo: page 1 - menu
         adapter = new ProductListAdapter(this, new ArrayList<Product>());
 
         RecyclerView bs_recyclerView = findViewById(R.id.best_sell_product_rv);
