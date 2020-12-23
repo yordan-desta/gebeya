@@ -1,0 +1,25 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center|left"
+            android:padding="16dp"
+            android:text="Some product \nSome Description" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_image"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end" />
+    </androidx.cardview.widget.CardView>
+</ScrollView>

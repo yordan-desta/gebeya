@@ -10,10 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.dawntechs.gebeyaEcommerceApp.MainApp;
 import com.dawntechs.gebeyaEcommerceApp.R;
@@ -38,8 +43,8 @@ public class ProductListActivity extends BaseActivity {
 
         setUpToolbar(getString(R.string.app_name));
 
-        //todo: page 1 - implement the first card
         //todo: page 1 - search
+
         adapter = new ProductListAdapter(this, new ArrayList<Product>());
 
         RecyclerView bs_recyclerView = findViewById(R.id.best_sell_product_rv);
@@ -65,6 +70,9 @@ public class ProductListActivity extends BaseActivity {
             invalidateOptionsMenu();
         });
 
+        ViewPager mPager = findViewById(R.id.pager);
+        PagerAdapter pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(pagerAdapter);
     }
 
     protected int cart_count = 0;
@@ -106,5 +114,23 @@ public class ProductListActivity extends BaseActivity {
         view.buildDrawingCache();
 
         return new BitmapDrawable(getResources(), view.getDrawingCache());
+    }
+
+    private static final int PAGES = 3;
+
+    private static class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager supportFragmentManager) {
+            super(supportFragmentManager);
+        }
+
+        @NonNull
+        public Fragment getItem(int position) {
+            return new SliderPageFragment();
+        }
+
+        @Override
+        public int getCount() {
+            return PAGES;
+        }
     }
 }
