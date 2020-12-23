@@ -11,7 +11,7 @@ import com.dawntechs.gebeyaEcommerceApp.common.BaseEntity;
 
 public class Product extends BaseEntity implements Parcelable {
 
-    public float id;
+    public long id;
     //data encapsulation ignored for simplicity
     public String nom;
 
@@ -30,7 +30,7 @@ public class Product extends BaseEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeFloat(id);
+        parcel.writeLong(id);
         parcel.writeString(nom);
         parcel.writeString(currency);
         parcel.writeString(imageUrl);
@@ -49,7 +49,7 @@ public class Product extends BaseEntity implements Parcelable {
     };
 
     private Product(Parcel in) {
-        id = in.readFloat();
+        id = in.readLong();
         nom = in.readString();
         currency = in.readString();
         imageUrl = in.readString();

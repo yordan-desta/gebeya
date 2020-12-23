@@ -23,16 +23,10 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     private List<CartItem> items;
     private final Context context;
-    private CartUpdateActionCallback callback;
 
-    public interface CartUpdateActionCallback {
-        void CartItemUpdated(CartItem cartItem);
-    }
-
-    CartListAdapter(Context context, List<CartItem> items, CartUpdateActionCallback callback) {
+    CartListAdapter(Context context, List<CartItem> items) {
         this.items = items;
         this.context = context;
-        this.callback = callback;
     }
 
     @NonNull
@@ -55,20 +49,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
         Picasso.get().load(product.imageUrl).into(holder.imageView);
 
-        holder.plustQty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                item.quantity += 1;
-                callback.CartItemUpdated(item);
-            }
-        });
-        holder.minustQty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                item.quantity -= 1;
-                callback.CartItemUpdated(item);
-            }
-        });
+        holder.plustQty.setOnClickListener(view -> item.quantity += 1);
+        holder.minustQty.setOnClickListener(view -> item.quantity -= 1);
     }
 
     @Override

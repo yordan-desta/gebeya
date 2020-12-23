@@ -23,18 +23,22 @@ public class CartRepository {
     }
 
     public void insert(CartItem cartItem) {
-        cartDao.insert(cartItem);
+        AppDatabase.databaseWriteExecutor.execute(() -> cartDao.insert(cartItem));
     }
 
     public void updateCartItem(CartItem cartItem) {
-        cartDao.updateCartItem(cartItem);
+        AppDatabase.databaseWriteExecutor.execute(() -> cartDao.updateCartItem(cartItem));
+    }
+
+    public void updateCart(List<CartItem> cartItems) {
+        AppDatabase.databaseWriteExecutor.execute(() ->cartDao.insert(cartItems));
     }
 
     public LiveData<Integer> getItemCount() {
         return cartDao.getItemCount();
     }
 
-    public LiveData<CartItem> getCartByProductId(float id) {
+    public LiveData<CartItem> getCartByProductId(long id) {
         return cartDao.getByProductId(id);
     }
 

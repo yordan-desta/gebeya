@@ -17,7 +17,7 @@ public class ProductDetailViewModel extends ViewModel {
         repository = new CartRepository(application);
     }
 
-    public LiveData<CartItem> getProduct(float id) {
+    public LiveData<CartItem> getProduct(long id) {
         if (cartItem == null) {
             cartItem = repository.getCartByProductId(id);
         }

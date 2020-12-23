@@ -28,5 +28,7 @@ public class CartViewModel extends ViewModel {
 
     public void update(CartItem cartItem) { repository.updateCartItem(cartItem); }
 
+    public void updateCart(List<CartItem> cartItems) { repository.updateCart(cartItems); }
+
     public LiveData<Integer> getItemCount(){ return repository.getItemCount();}
 }

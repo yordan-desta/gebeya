@@ -13,8 +13,11 @@ import java.util.List;
 @Dao
 public interface CartDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(CartItem cartItem);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(List<CartItem> cartItems);
 
     @Delete
     void delete(CartItem cartItem);
@@ -23,7 +26,7 @@ public interface CartDao {
     LiveData<List<CartItem>> getCartItems();
 
     @Query("DELETE FROM CartItem where id=:productId")
-    void deleteByProduct(float productId);
+    void deleteByProduct(long productId);
 
     @Update()
     void updateCartItem(CartItem cartItem);
@@ -32,6 +35,6 @@ public interface CartDao {
     LiveData<Integer> getItemCount();
 
     @Query("select * from CartItem where id=:id limit 1")
-    LiveData<CartItem> getByProductId(float id);
+    LiveData<CartItem> getByProductId(long id);
 }
 
