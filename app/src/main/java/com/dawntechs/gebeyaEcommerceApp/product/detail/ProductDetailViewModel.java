@@ -31,4 +31,8 @@ public class ProductDetailViewModel extends ViewModel {
     public void removeFromCart(CartItem cartItem){
         repository.delete(cartItem);
     }
+
+    public void removeFromCartByProduct(long id) {
+        repository.deleteCartByProduct(id);
+    }
 }

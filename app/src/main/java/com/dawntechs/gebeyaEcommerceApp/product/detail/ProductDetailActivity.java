@@ -19,13 +19,7 @@ import com.squareup.picasso.Picasso;
 
 public class ProductDetailActivity extends BaseActivity {
 
-    private View.OnClickListener addToCartListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //todo: implement me
-            Toast.makeText(view.getContext(), "Added to card", Toast.LENGTH_SHORT).show();
-        }
-    };
+    private boolean productInCart = false;
 
     private ProductDetailViewModel viewModel;
 
@@ -50,23 +44,23 @@ public class ProductDetailActivity extends BaseActivity {
 
             viewModel = new ProductDetailViewModel((MainApp) this.getApplicationContext());
 
-            viewModel.getProduct(product.id).observe(this, new Observer<CartItem>() {
-
-                @Override
-                public void onChanged(CartItem cartItem) {
-                    if (cartItem == null) {
-                        Toast.makeText(getApplicationContext(), "Not in cart Item", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "In cart Item", Toast.LENGTH_SHORT).show();
-                    }
+            viewModel.getProduct(product.id).observe(this, cartItem -> {
+                if (cartItem == null) {
+                    productInCart = false;
+                    addToCart.setText(R.string.add_to_cart);
+                } else {
+                    productInCart = true;
+                    addToCart.setText(R.string.remove_from_cart);
                 }
             });
 
-            addToCart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //create a cart with default quantity 1
+            addToCart.setOnClickListener(view -> {
+                if (!productInCart) {
                     viewModel.addToCart(new CartItem(product, 1));
+                    Toast.makeText(view.getContext(), "Added to cart", Toast.LENGTH_SHORT).show();
+                } else {
+                    viewModel.removeFromCartByProduct(product.id);
+                    Toast.makeText(view.getContext(), "Removed from cart", Toast.LENGTH_SHORT).show();
                 }
             });
 

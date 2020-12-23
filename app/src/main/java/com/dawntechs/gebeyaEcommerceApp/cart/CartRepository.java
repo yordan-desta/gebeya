@@ -43,6 +43,10 @@ public class CartRepository {
     }
 
     public void delete(CartItem cartItem) {
-        cartDao.delete(cartItem);
+        AppDatabase.databaseWriteExecutor.execute(() -> cartDao.delete(cartItem));
+    }
+
+    public void deleteCartByProduct(long id) {
+        AppDatabase.databaseWriteExecutor.execute(() -> cartDao.deleteByProduct(id));
     }
 }
