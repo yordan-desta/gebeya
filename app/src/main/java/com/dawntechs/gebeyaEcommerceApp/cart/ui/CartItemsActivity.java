@@ -13,7 +13,7 @@ import com.dawntechs.gebeyaEcommerceApp.common.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartItemsActivity extends BaseActivity {
+public class CartItemsActivity extends BaseActivity implements CartListAdapter.CartAdapterCallback {
 
     private CartListAdapter cartListAdapter;
     private CartViewModel viewModel;
@@ -32,6 +32,7 @@ public class CartItemsActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         viewModel = new CartViewModel((MainApp) this.getApplicationContext());
+
         viewModel.getCartItems().observe(this, cartItems -> {
             cartListAdapter.setData(cartItems);
             this.cartItems = cartItems;
@@ -43,5 +44,10 @@ public class CartItemsActivity extends BaseActivity {
         super.onPause();
         //persist updates
         viewModel.updateCart(cartItems);
+    }
+
+    @Override
+    public void removeItem(CartItem cartItem) {
+        viewModel.deleteCartItem(cartItem);
     }
 }

@@ -1,10 +1,10 @@
 package com.dawntechs.gebeyaEcommerceApp.cart.ui;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,11 +22,15 @@ import java.util.List;
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> implements EntityListAdapter<CartItem> {
 
     private List<CartItem> items;
-    private final Context context;
+    private final CartAdapterCallback callback;
 
-    CartListAdapter(Context context, List<CartItem> items) {
+    public interface CartAdapterCallback{
+        void removeItem(CartItem cartItem);
+    }
+
+    CartListAdapter(CartAdapterCallback callback, List<CartItem> items) {
         this.items = items;
-        this.context = context;
+        this.callback = callback;
     }
 
     @NonNull
@@ -57,6 +61,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             item.quantity = Math.max((item.quantity - 1), 0);
             holder.qty.setText(String.valueOf(item.quantity));
         });
+
+        holder.closeAction.setOnClickListener(view -> callback.removeItem(item));
     }
 
     @Override
@@ -81,6 +87,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         private final Button minustQty;
 
         private final ImageView imageView;
+        private final ImageButton closeAction;
 
         public ViewHolder(View view) {
             super(view);
@@ -93,6 +100,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             plustQty = view.findViewById(R.id.plus);
             minustQty = view.findViewById(R.id.minus);
             qty = view.findViewById(R.id.quantity);
+
+            closeAction = view.findViewById(R.id.cart_action_remove);
         }
     }
 }
