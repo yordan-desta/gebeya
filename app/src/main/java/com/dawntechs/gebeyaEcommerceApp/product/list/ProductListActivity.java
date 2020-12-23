@@ -1,5 +1,6 @@
 package com.dawntechs.gebeyaEcommerceApp.product.list;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,13 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dawntechs.gebeyaEcommerceApp.MainApp;
 import com.dawntechs.gebeyaEcommerceApp.R;
+import com.dawntechs.gebeyaEcommerceApp.cart.ui.CartItemsActivity;
 import com.dawntechs.gebeyaEcommerceApp.common.BaseActivity;
 import com.dawntechs.gebeyaEcommerceApp.product.Product;
 
@@ -57,12 +58,9 @@ public class ProductListActivity extends BaseActivity {
             }
         });
 
-        viewModel.getCartItemsCount().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer count) {
-                cart_count = count;
-                invalidateOptionsMenu();
-            }
+        viewModel.getCartItemsCount().observe(this, count -> {
+            cart_count = count;
+            invalidateOptionsMenu();
         });
 
     }
@@ -71,7 +69,6 @@ public class ProductListActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem menuItem = menu.findItem(R.id.cart_action);
         menuItem.setIcon(getCartIcon());
@@ -81,10 +78,14 @@ public class ProductListActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.cart_action) {
+            startActivity(new Intent(this, CartItemsActivity.class));
+        }
         return super.onOptionsItemSelected(item);
+
     }
 
-    private Drawable getCartIcon(){
+    private Drawable getCartIcon() {
 
         View view = LayoutInflater.from(this).inflate(R.layout.badge_icon_layout, null);
         if (cart_count == 0) {
@@ -102,5 +103,6 @@ public class ProductListActivity extends BaseActivity {
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
 
-        return new BitmapDrawable(getResources(), view.getDrawingCache());    }
+        return new BitmapDrawable(getResources(), view.getDrawingCache());
+    }
 }

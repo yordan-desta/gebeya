@@ -45,12 +45,18 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         holder.name.setText(product.nom);
         holder.vendor.setText("Vendor X");
 
-        holder.qty.setText(item.quantity);
+        holder.qty.setText(String.valueOf(item.quantity));
 
         Picasso.get().load(product.imageUrl).into(holder.imageView);
 
-        holder.plustQty.setOnClickListener(view -> item.quantity += 1);
-        holder.minustQty.setOnClickListener(view -> item.quantity -= 1);
+        holder.plustQty.setOnClickListener(view -> {
+            item.quantity += 1;
+            holder.qty.setText(String.valueOf(item.quantity));
+        });
+        holder.minustQty.setOnClickListener(view -> {
+            item.quantity = Math.max((item.quantity - 1), 0);
+            holder.qty.setText(String.valueOf(item.quantity));
+        });
     }
 
     @Override

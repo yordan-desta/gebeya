@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cart.ui.CartItemsActivity"></activity>
+        <activity
+            android:name=".cart.ui.CartItemsActivity"
+            android:parentActivityName=".product.list.ProductListActivity" />
         <activity
             android:name=".product.detail.ProductDetailActivity"
             android:parentActivityName=".product.list.ProductListActivity" />

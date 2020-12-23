@@ -17,7 +17,7 @@ public class CartItemsActivity extends BaseActivity {
 
     private CartListAdapter cartListAdapter;
     private CartViewModel viewModel;
-    private final List<CartItem> cartItems = new ArrayList<>();
+    private List<CartItem> cartItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,10 @@ public class CartItemsActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         viewModel = new CartViewModel((MainApp) this.getApplicationContext());
-        viewModel.getCartItems().observe(this, cartItems -> cartListAdapter.setData(cartItems));
+        viewModel.getCartItems().observe(this, cartItems -> {
+            cartListAdapter.setData(cartItems);
+            this.cartItems = cartItems;
+        });
     }
 
     @Override
