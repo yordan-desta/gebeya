@@ -10,6 +10,8 @@ import com.dawntechs.gebeyaEcommerceApp.common.BaseEntity;
  **/
 
 public class Product extends BaseEntity implements Parcelable {
+
+    public float id;
     //data encapsulation ignored for simplicity
     public String nom;
 

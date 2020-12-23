@@ -8,7 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.lifecycle.Observer;
+
+import com.dawntechs.gebeyaEcommerceApp.MainApp;
 import com.dawntechs.gebeyaEcommerceApp.R;
+import com.dawntechs.gebeyaEcommerceApp.cart.CartItem;
 import com.dawntechs.gebeyaEcommerceApp.common.BaseActivity;
 import com.dawntechs.gebeyaEcommerceApp.product.Product;
 import com.squareup.picasso.Picasso;
@@ -23,12 +27,14 @@ public class ProductDetailActivity extends BaseActivity {
         }
     };
 
+    private ProductDetailViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        Product product = getProductFromIntent();
+        final Product product = getProductFromIntent();
 
         if (product != null) {
 
@@ -41,7 +47,28 @@ public class ProductDetailActivity extends BaseActivity {
             price.setText(String.format("%s%s", product.currency, product.price));
 
             Button addToCart = findViewById(R.id.add_to_cart);
-            addToCart.setOnClickListener(addToCartListener);
+
+            viewModel = new ProductDetailViewModel((MainApp) this.getApplicationContext());
+
+            viewModel.getProduct(product.id).observe(this, new Observer<CartItem>() {
+
+                @Override
+                public void onChanged(CartItem cartItem) {
+                    if (cartItem == null) {
+                        Toast.makeText(getApplicationContext(), "Not in cart Item", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "In cart Item", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            addToCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //create a cart with default quantity 1
+                    viewModel.addToCart(new CartItem(product, 1));
+                }
+            });
 
         } else finish();
 

@@ -12,10 +12,10 @@ import com.dawntechs.gebeyaEcommerceApp.cart.CartItem;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {CartItem.class}, version = 1, exportSchema = false)
+@Database(entities = {CartItem.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    public static final String DATABASE_NAME = "ecommerce-db";
+    public static final String DATABASE_NAME = "ecommercedb";
 
     public abstract CartDao cartDao();
 

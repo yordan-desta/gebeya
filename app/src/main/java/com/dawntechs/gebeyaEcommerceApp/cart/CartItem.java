@@ -1,17 +1,20 @@
 package com.dawntechs.gebeyaEcommerceApp.cart;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.dawntechs.gebeyaEcommerceApp.common.BaseEntity;
 import com.dawntechs.gebeyaEcommerceApp.product.Product;
 
 @Entity
-public class CartItem {
+public class CartItem extends BaseEntity {
 
     @PrimaryKey(autoGenerate = true)
-    public int _id;
+    @ColumnInfo(name = "local_id")
+    public int local_id;
 
     @Embedded
     public Product product;
