@@ -1,6 +1,8 @@
 package com.dawntechs.gebeyaEcommerceApp.cart.ui;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -54,5 +56,11 @@ public class CartItemsActivity extends BaseActivity implements CartListAdapter.C
     @Override
     public void removeItem(CartItem cartItem) {
         viewModel.deleteCartItem(cartItem);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cart, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
